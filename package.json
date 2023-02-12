@@ -1,0 +1,23 @@
+{
+  "name": "geor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "start": "parcel serve src/index.html",
+    "build": "cross-env NODE_ENV=production parcel build src/index.html --public-url .",
+    "deploy": "gh-pages -d dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "gh-pages": "^5.0.0",
+    "typescript": "^4.9.5",
+    "parcel-bundler": "^1.12.5"
+  }
+}
