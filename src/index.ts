@@ -18,7 +18,8 @@ window.onload = () => {
 
 const allDogs = ["georgie", "miso", "tuckie", "chungus", "big chungas"]
 function seedRandom(seed: number): number {
-    var x = Math.sin(seed++) * 10000; 
+    const x = Math.sin(seed++) * 10000;
+    console.log(x - Math.floor(x))
     return x - Math.floor(x);
 }
 
@@ -33,19 +34,15 @@ class DogDayHandler {
     public renderDate() {
         DogDayHandler.dateElement.innerHTML = DogDayHandler.dogDay.toDateString()
         var seed = DogDayHandler.dogDay.getTime()
-        const jList : string[] = [], lList : string[] = []
-        for (const dog of allDogs) {
-            (seedRandom(seed++) > .5 ? jList : lList).push(dog)
-        }
+        const shuffleDogs = [...allDogs].sort((a, b) => .5 - seedRandom(seed++))
+        const splitIndex = Math.floor(seedRandom(seed++) * (shuffleDogs.length - 1)) + 1
+        const jList = shuffleDogs.slice(0,splitIndex), lList = shuffleDogs.slice(splitIndex)
         DogDayHandler.jDogElement.innerHTML = String(jList)
         DogDayHandler.lDogElement.innerHTML = String(lList)
     }
-    
+
     public changeDate(dateIncrement: number) {
-        console.log("inc", dateIncrement)
-        console.log("before", DogDayHandler.dogDay.getDate())
         DogDayHandler.dogDay.setDate(DogDayHandler.dogDay.getDate() + dateIncrement)
-        console.log("after", DogDayHandler.dogDay.getDate())
         this.renderDate()
     }
 }
